@@ -6,7 +6,7 @@ import importlib
 import pkgutil
 
 
-import ufair
+import U_FaIR
 
 
 def import_submodules(package_name):
@@ -19,5 +19,5 @@ def import_submodules(package_name):
             import_submodules(full_name)
 
 
-import_submodules("ufair")
-print(ufair.__version__)
+import_submodules("U_FaIR")
+print(U_FaIR.__version__)

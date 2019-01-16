@@ -1,7 +1,7 @@
 venv: setup.py
 	python3 -m venv venv
 	./venv/bin/pip install --upgrade pip
-	./venv/bin/pip install -e .[test,docs,deploy]
+	./venv/bin/pip install -e .[tests,docs,deploy]
 	touch venv
 
 test: venv
