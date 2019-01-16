@@ -41,7 +41,7 @@ setup(
     # },
     extras_require={
         # "docs": ["sphinx >= 1.4", "sphinx_rtd_theme", "sphinx-autodoc-typehints"],
-        "tests": ["pytest", "pytest-cov", "codecov"],
+        "tests": ["pytest>=4.1.1", "pytest-cov", "codecov"],
         # "dev": [
         #     "setuptools>=38.6.0",
         #     "twine>=1.11.0",
