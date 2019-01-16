@@ -14,8 +14,6 @@ DESCRIPTION = (
 )
 README = "README.md"
 
-SOURCE_DIR = "U_FaIR"
-
 with open(README, "r") as readme_file:
     README_TEXT = readme_file.read()
 
@@ -53,8 +51,7 @@ setup(
         "Programming Language :: Python :: 3.6",
     ],
     keywords=["simple", "climate", "model", "fair"],
-    packages=find_packages(SOURCE_DIR),  # no tests/docs in `src` so don't need exclude
-    package_dir={"": SOURCE_DIR},
+    packages=find_packages(exclude=["tests"]),
     install_requires=["numpy", "scipy"],
     extras_require={
         "tests": ["pytest>=4.1.1", "pytest-cov", "codecov"],
