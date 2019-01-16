@@ -1,56 +1,62 @@
-# import versioneer
+import versioneer
 
-from setuptools import setup
-from os import path
+from setuptools import setup, find_packages
+from setuptools.command.test import test as TestCommand
 
-here = path.abspath(path.dirname(__file__))
 
-# Get the long description from the README file
-with open(path.join(here, "README.md"), encoding="utf-8") as f:
-    long_description = f.read()
+PACKAGE_NAME = "U_FaIR"
+AUTHOR = "Stuart Jenkins"
+EMAIL = "stuart.a.jenkins@gmail.com"
+URL = "https://github.com/stujen/Universal-FAIR"
 
-# Arguments marked as "Required" below must be included for upload to PyPI.
-# Fields marked as "Optional" may be commented out.
+DESCRIPTION = (
+    "5-equation Finite Amplitude Impulse Response model implementation"
+)
+README = "README.md"
+
+SOURCE_DIR = "U_FaIR"
+
+with open(README, "r") as readme_file:
+    README_TEXT = readme_file.read()
+
+
+class UFair(TestCommand):
+    def finalize_options(self):
+        TestCommand.finalize_options(self)
+        self.test_args = []
+        self.test_suite = True
+
+    def run_tests(self):
+        import pytest
+
+        pytest.main(self.test_args)
+
+
+cmdclass = versioneer.get_cmdclass()
+cmdclass.update({"test": CMIP6DataCitationGenerator})
 
 setup(
-    name="openscm",
-    version="v0.0.0",
-    description="Description",
-    long_description=long_description,
+    name=PACKAGE_NAME,
+    version=versioneer.get_version(),
+    description=DESCRIPTION,
+    long_description=README_TEXT,
     long_description_content_type="text/markdown",
-    url="https://github.com/stujen/test_repo",
+    author=AUTHOR,
+    author_email=EMAIL,
+    url=URL,
+    # license="uknown",
     classifiers=[
-        #   3 - Alpha
-        #   4 - Beta
-        #   5 - Production/Stable
-        # "Development Status :: 3 - Alpha",
-        # "Intended Audience :: Developers",
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
         # "License :: OSI Approved :: MIT License",
-        # "Programming Language :: Python :: 3",
-        # "Programming Language :: Python :: 3.5",
-        # "Programming Language :: Python :: 3.6",
-        # "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+        "Programming Language :: Python :: 3.6",
     ],
-    # keywords="simple climate model",
-    # license="GNU Affero General Public License v3.0 or later",
-    packages=["U_FaIR"],
+    keywords=["simple", "climate", "model", "fair"],
+    packages=find_packages(SOURCE_DIR),  # no tests/docs in `src` so don't need exclude
+    package_dir={"": SOURCE_DIR},
     install_requires=["numpy", "scipy"],
-    # project_urls={  # Optional
-    #     "Bug Reports": "https://github.com/openclimatedata/openscm/issues",
-    #     "Source": "https://github.com/openclimatedata/openscm/",
-    # },
     extras_require={
-        # "docs": ["sphinx >= 1.4", "sphinx_rtd_theme", "sphinx-autodoc-typehints"],
         "tests": ["pytest>=4.1.1", "pytest-cov", "codecov"],
-        # "dev": [
-        #     "setuptools>=38.6.0",
-        #     "twine>=1.11.0",
-        #     "wheel>=0.31.0",
-        #     "black",
-        #     "flake8",
-        #     "pandas",
-        #     "matplotlib",
-        #     "numpy",
-        # ],
     },
 )
