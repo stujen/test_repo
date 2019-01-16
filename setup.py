@@ -54,6 +54,15 @@ setup(
     packages=find_packages(exclude=["tests"]),
     install_requires=["numpy", "scipy"],
     extras_require={
+        "docs": ["sphinx>=1.4", "sphinx_rtd_theme"],
         "tests": ["pytest>=4.1.1", "pytest-cov", "codecov"],
+        "deploy": [
+            "setuptools>=38.6.0",
+            "twine>=1.11.0",
+            "wheel>=0.31.0",
+            "black",
+            "flake8",
+            "versioneer",
+        ],
     },
 )
