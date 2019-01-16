@@ -33,7 +33,7 @@ class UFair(TestCommand):
 
 
 cmdclass = versioneer.get_cmdclass()
-cmdclass.update({"test": CMIP6DataCitationGenerator})
+cmdclass.update({"test": UFair})
 
 setup(
     name=PACKAGE_NAME,
